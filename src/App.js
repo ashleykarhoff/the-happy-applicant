@@ -19,12 +19,14 @@ class App extends Component {
     return (
       <React.Fragment>
         <TopNav />
-        <SideNav />
-        <Router>
-          <SearchContainer path="search" />
-          <BoardContainer path="/" />
-          <ProfileContainer path="profile" />
-        </Router>
+        <div className="main-container">
+          <SideNav />
+          <Router>
+            <SearchContainer path="search" />
+            <BoardContainer path="/" />
+            <ProfileContainer path="profile" />
+          </Router>
+        </div>
       </React.Fragment>
     );
   }

@@ -4,11 +4,9 @@ class TopNav extends Component {
   state = {};
   render() {
     return (
-      <div className="topnav-container">
-        <div className="topnav-logo-container">
-          {/* <img src="" alt="" className="topnav-logo" /> */}
-          <div>Happy Applicant</div>
-        </div>
+      <div className="topnav">
+        {/* <img src="" alt="" className="topnav-logo" /> */}
+        <div id="logo">Happy Applicant</div>
       </div>
     );
   }

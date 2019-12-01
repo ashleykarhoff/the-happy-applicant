@@ -5,8 +5,8 @@ class SideNav extends Component {
   state = {};
   render() {
     return (
-      <div>
-        <nav>
+      <div className="sidenav-container">
+        <nav className="sidenav-links">
           <Link to="search">Search</Link>
           <Link to="/">Board</Link>
           <Link to="profile">Profile</Link>
