@@ -30,8 +30,7 @@ class SearchContainer extends Component {
 
   render() {
     return (
-      <div>
-        Search Container
+      <div className="search-container">
         <SearchBar
           handleSubmit={this.handleSubmit}
           handleInput={this.handleInput}
