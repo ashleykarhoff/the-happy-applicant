@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SearchResultCard from "../../components/search/SearchResultCard";
+import SearchResultCard from "./SearchResultCard";
 
 class SearchResultsContainer extends Component {
   state = {};
