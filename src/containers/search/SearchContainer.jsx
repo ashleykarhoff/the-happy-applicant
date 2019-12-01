@@ -8,6 +8,14 @@ class SearchContainer extends Component {
     location: ""
   };
 
+  componentDidMount() {
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    const targetUrl = "https://jobs.github.com/positions.json";
+    fetch(proxyUrl + targetUrl)
+      .then(resp => resp.json())
+      .then(console.log);
+  }
+
   handleInput = event => {
     event.persist();
     this.setState({ [event.target.name]: event.target.value });
