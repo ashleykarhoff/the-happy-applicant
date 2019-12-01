@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Link } from "@reach/router";
+import { Router } from "@reach/router";
 import "./App.css";
 import TopNav from "./components/navs/TopNav";
 import SideNav from "./components/navs/SideNav";
