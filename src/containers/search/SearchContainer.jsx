@@ -5,16 +5,9 @@ import SearchResultsContainer from "./SearchResultsContainer";
 class SearchContainer extends Component {
   state = {
     jobTitle: "",
-    location: ""
+    location: "",
+    jobs: []
   };
-
-  componentDidMount() {
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    const targetUrl = "https://jobs.github.com/positions.json";
-    fetch(proxyUrl + targetUrl)
-      .then(resp => resp.json())
-      .then(console.log);
-  }
 
   handleInput = event => {
     event.persist();
@@ -27,6 +20,14 @@ class SearchContainer extends Component {
     // fetch search results using current search state
   };
 
+  async componentDidMount() {
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    const targetUrl = "https://jobs.github.com/positions.json";
+    const response = await fetch(proxyUrl + targetUrl);
+    const json = await response.json();
+    this.setState({ jobs: json });
+  }
+
   render() {
     return (
       <div>
@@ -36,7 +37,7 @@ class SearchContainer extends Component {
           handleInput={this.handleInput}
           state={this.state}
         />
-        <SearchResultsContainer />
+        <SearchResultsContainer jobs={this.state.jobs} />
       </div>
     );
   }

@@ -4,10 +4,12 @@ import SearchResultCard from "./SearchResultCard";
 class SearchResultsContainer extends Component {
   state = {};
   render() {
+    const jobs = this.props.jobs;
     return (
-      <div>
-        Search Results Container
-        <SearchResultCard />
+      <div className="search-results-container">
+        {jobs.map(job => (
+          <SearchResultCard key={job.id} job={job} />
+        ))}
       </div>
     );
   }
