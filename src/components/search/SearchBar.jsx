@@ -1,39 +1,23 @@
 import React, { Component } from "react";
 
 class SearchBar extends Component {
-  state = {
-    jobTitle: "",
-    location: ""
-  };
-
-  handleInput = event => {
-    event.persist();
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  handleSubmit = event => {
-    event.persist();
-    event.preventDefault();
-    // fetch search results using current search state
-  };
-
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.props.handleSubmit}>
           <input
-            onChange={this.handleInput}
+            onChange={this.props.handleInput}
             type="text"
             placeholder="job title"
             name="jobTitle"
-            value={this.state.jobTitle}
+            value={this.props.state.jobTitle}
           />
           <input
-            onChange={this.handleInput}
+            onChange={this.props.handleInput}
             type="text"
             placeholder="location"
             name="location"
-            value={this.state.location}
+            value={this.props.state.location}
           />
           <button>Search</button>
         </form>
