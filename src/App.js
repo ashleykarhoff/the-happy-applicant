@@ -31,6 +31,10 @@ class App extends Component {
     this.setState({ userData: userData });
   };
 
+  handleChangeBetweenColumns = obj => {
+    this.setState({ userData: obj });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -42,7 +46,9 @@ class App extends Component {
             <BoardContainer
               path="/"
               board={this.state.userData.board_columns}
+              userData={this.state.userData}
               handleCardChange={this.handleCardChange}
+              handleChangeBetweenColumns={this.handleChangeBetweenColumns}
             />
             <ProfileContainer path="profile" />
           </Router>

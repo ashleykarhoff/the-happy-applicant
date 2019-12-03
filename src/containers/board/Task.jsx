@@ -7,7 +7,7 @@ const Container = styled.div`
   border-radius: 2px;
   padding: 8px;
   margin-bottom: 8px;
-  background-color: white;
+  background-color: ${props => (props.isDragging ? "lightgreen" : "white")};
 `;
 
 class Task extends Component {
@@ -18,9 +18,10 @@ class Task extends Component {
         draggableId={this.props.card.id.toString()}
         index={this.props.index}
       >
-        {provided => (
+        {(provided, snapshot) => (
           <Container
             ref={provided.innerRef}
+            isDragging={snapshot.isDragging}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
