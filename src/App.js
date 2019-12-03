@@ -6,6 +6,8 @@ import SideNav from "./components/navs/SideNav";
 import SearchContainer from "./containers/search/SearchContainer";
 import BoardContainer from "./containers/board/BoardContainer";
 import ProfileContainer from "./containers/users/ProfileContainer";
+import LoginContainer from "./components/users/LoginContainer";
+import SignupContainer from "./components/users/SignupContainer";
 
 class App extends Component {
   state = {
@@ -42,6 +44,8 @@ class App extends Component {
         <div className="main-container">
           <SideNav />
           <Router>
+            <SignupContainer path="signup" />
+            <LoginContainer path="login" />
             <SearchContainer path="search" />
             <BoardContainer
               path="/"
