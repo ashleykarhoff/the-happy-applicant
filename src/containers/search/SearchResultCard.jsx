@@ -7,11 +7,11 @@ class SearchResultCard extends Component {
     //   Render job location, job title and company on each card
     return (
       <div className="search-result-card">
-        <div>{job.location}</div>
-        <div>
-          {job.title} @ {job.company}
+        <div className="search-result-location">{job.location}</div>
+        <div className="search-result-title">
+          {job.title} <span>@</span> {job.company}
         </div>
-        <div>{job.type} </div>
+        <div className="search-result-skills">{job.type} </div>
       </div>
     );
   }

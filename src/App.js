@@ -8,13 +8,20 @@ import BoardContainer from "./containers/board/BoardContainer";
 import ProfileContainer from "./containers/users/ProfileContainer";
 
 class App extends Component {
-  componentDidMount = () => {
-    fetch("http://localhost:4000/api/v1/applicants")
-      .then(resp => resp.json())
-      .then(console.log);
+  state = {
+    userData: []
   };
 
-  state = {};
+  componentDidMount = () => {
+    this.fetch();
+  };
+
+  async fetch() {
+    const user = await fetch("http://localhost:3000/api/v1/applicants/2");
+    const data = await user.json();
+    this.setState({ userData: data });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -23,7 +30,10 @@ class App extends Component {
           <SideNav />
           <Router>
             <SearchContainer path="search" />
-            <BoardContainer path="/" />
+            <BoardContainer
+              path="/"
+              board={this.state.userData.board_columns}
+            />
             <ProfileContainer path="profile" />
           </Router>
         </div>

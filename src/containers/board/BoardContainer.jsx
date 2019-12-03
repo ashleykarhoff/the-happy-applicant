@@ -1,9 +1,17 @@
 import React, { Component } from "react";
+import Column from "./Column";
 
 class BoardContainer extends Component {
-  state = {};
   render() {
-    return <div>Board Container</div>;
+    const columns = this.props.board;
+
+    return (
+      <div id="board">
+        {columns !== undefined
+          ? columns.map(column => <Column column={column} />)
+          : null}
+      </div>
+    );
   }
 }
 

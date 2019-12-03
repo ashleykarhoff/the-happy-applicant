@@ -114,4 +114,24 @@
   padding: 10px;
 }
 
+.search-result-location {
+  font-style: italic;
+  font-weight: 600;
+}
+
+.search-result-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.search-result-title span {
+  font-weight: 500;
+}
+
 /* Search Container Styling Ends */
+
+/* Board Container Styling Starts */
+
+#board {
+  margin-left: 200px;
+}
