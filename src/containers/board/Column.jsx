@@ -1,12 +1,30 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+import Task from "./Task";
+
+const Container = styled.div`
+  margin: 8px;
+  border: 1px solid lightgrey;
+  border-radius: 2px;
+`;
+const Title = styled.h3`
+  padding: 8px;
+`;
+const TaskList = styled.div`
+  padding: 8px;
+`;
 
 class Column extends Component {
   render() {
-    const { column } = this.props;
     return (
-      <div className="column">
-        <div className="title">{column.title}</div>
-      </div>
+      <Container>
+        <Title>{this.props.column.title}</Title>
+        <TaskList>
+          {this.props.column.cards.map(card => (
+            <Task key={card.id} task={card} />
+          ))}
+        </TaskList>
+      </Container>
     );
   }
 }
