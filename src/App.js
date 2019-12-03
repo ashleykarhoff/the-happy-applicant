@@ -22,6 +22,15 @@ class App extends Component {
     this.setState({ userData: data });
   }
 
+  handleCardChange = newColumn => {
+    // Update state from here
+    const userData = this.state.userData;
+    const currentColumn = userData.board_columns[newColumn.id - 2];
+    userData.board_columns[currentColumn.id - 2] = newColumn;
+
+    this.setState({ userData: userData });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -33,6 +42,7 @@ class App extends Component {
             <BoardContainer
               path="/"
               board={this.state.userData.board_columns}
+              handleCardChange={this.handleCardChange}
             />
             <ProfileContainer path="profile" />
           </Router>

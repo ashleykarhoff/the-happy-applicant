@@ -3,8 +3,34 @@ import Column from "./Column";
 import { DragDropContext } from "react-beautiful-dnd";
 
 class BoardContainer extends Component {
-  onDragEnd = () => {
-    // TODO
+  onDragEnd = result => {
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    const column = this.props.board[source.droppableId - 2];
+    const card = column.cards.filter(
+      card => card.id === parseInt(draggableId)
+    )[0];
+    const newCards = Array.from(column.cards);
+    newCards.splice(source.index, 1);
+    newCards.splice(destination.index, 0, card);
+
+    const newColumn = {
+      ...column,
+      cards: newCards
+    };
+
+    this.props.handleCardChange(newColumn, result);
   };
 
   render() {
@@ -12,10 +38,9 @@ class BoardContainer extends Component {
     return (
       <div id="board">
         <DragDropContext onDragEnd={this.onDragEnd}>
-          {columns !== undefined ? (
-            // ? columns.map(column => <Column column={column} />)
-            <Column column={columns[0]} />
-          ) : null}
+          {columns !== undefined
+            ? columns.map(column => <Column column={column} />)
+            : null}
         </DragDropContext>
       </div>
     );
