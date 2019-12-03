@@ -57,31 +57,31 @@ class BoardContainer extends Component {
       };
 
       this.props.handleCardChange(newColumn, result);
+    } else {
+      // Moving cards between columns
+
+      const startCards = Array.from(start.cards);
+      startCards.splice(source.index, 1);
+
+      const newStart = {
+        ...start,
+        cards: startCards
+      };
+
+      const finishCards = Array.from(finish.cards);
+      finishCards.splice(destination.index, 0, card);
+
+      const newFinish = {
+        ...finish,
+        cards: finishCards
+      };
+
+      const obj = this.props.userData;
+      obj.board_columns[newStart.id - 2] = newStart;
+      obj.board_columns[newFinish.id - 2] = newFinish;
+
+      this.props.handleChangeBetweenColumns(obj);
     }
-
-    // Moving cards between columns
-
-    const startCards = Array.from(start.cards);
-    startCards.splice(source.index, 1);
-
-    const newStart = {
-      ...start,
-      cards: startCards
-    };
-
-    const finishCards = Array.from(finish.cards);
-    finishCards.splice(destination.index, 0, card);
-
-    const newFinish = {
-      ...finish,
-      cards: finishCards
-    };
-
-    const obj = this.props.userData;
-    obj.board_columns[newStart.id - 2] = newStart;
-    obj.board_columns[newFinish.id - 2] = newFinish;
-
-    this.props.handleChangeBetweenColumns(obj);
   };
 
   render() {
