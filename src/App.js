@@ -14,7 +14,8 @@ import CardPage from "./containers/board/CardPage";
 class App extends Component {
   state = {
     userData: [],
-    jobs: []
+    jobs: [],
+    job: []
   };
 
   componentDidMount = () => {
