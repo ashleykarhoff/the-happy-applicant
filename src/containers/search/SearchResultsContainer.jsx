@@ -3,8 +3,6 @@ import { Link } from "@reach/router";
 import SearchResultCard from "./SearchResultCard";
 
 class SearchResultsContainer extends Component {
-  state = {};
-
   render() {
     const jobs = this.props.jobs;
     return (

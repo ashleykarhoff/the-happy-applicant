@@ -8,12 +8,12 @@ import BoardContainer from "./containers/board/BoardContainer";
 import ProfileContainer from "./containers/users/ProfileContainer";
 import LoginContainer from "./components/users/LoginContainer";
 import SignupContainer from "./components/users/SignupContainer";
-import SearchResultCard from "./containers/search/SearchResultCard";
 import SearchResultPage from "./containers/search/SearchResultPage";
 
 class App extends Component {
   state = {
-    userData: []
+    userData: [],
+    jobs: []
   };
 
   componentDidMount = () => {
@@ -26,8 +26,35 @@ class App extends Component {
     this.setState({ userData: data });
   }
 
+  renderAllJobs = () => {
+    const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
+    const targetUrl = `https://jobs.github.com/positions.json`;
+    fetch(proxyUrl + targetUrl)
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ jobs: data });
+      });
+  };
+
+  renderJobSearch = (position, location) => {
+    const positionNoSpaces = this.removeSpaces(position);
+    const locationNoSpaces = this.removeSpaces(location);
+
+    const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
+    const targetUrl = `https://jobs.github.com/positions.json?description=${positionNoSpaces}&location=${locationNoSpaces}`;
+    fetch(proxyUrl + targetUrl)
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ jobs: data });
+      });
+  };
+
+  removeSpaces(string) {
+    const splitString = string.split(" ");
+    return splitString.join("+");
+  }
+
   handleCardChange = newColumn => {
-    // Update state from here
     const userData = this.state.userData;
     const currentColumn = userData.board_columns[newColumn.id - 2];
     userData.board_columns[currentColumn.id - 2] = newColumn;
@@ -39,6 +66,30 @@ class App extends Component {
     this.setState({ userData: obj });
   };
 
+  handleJobSave = job => {
+    const userData = this.state.userData;
+    const saved_column_id = this.state.userData.board_columns[0].id;
+    fetch(`http://localhost:3000/api/v1/cards`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify({
+        board_column_id: `${saved_column_id}`,
+        company: `${job.company}`,
+        company_logo: `${job.company_logo}`,
+        company_url: `${job.company_url}`,
+        description: `${job.description}`,
+        job_title: `${job.title}`,
+        location: `${job.location}`,
+        url: `${job.url}`
+      })
+    })
+      .then(resp => resp.json())
+      .catch(console.error);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -48,8 +99,17 @@ class App extends Component {
           <Router>
             <SignupContainer path="signup" />
             <LoginContainer path="login" />
-            <SearchContainer path="search" />
-            <SearchResultPage path="search/:id" />
+            <SearchContainer
+              path="search"
+              jobs={this.state.jobs}
+              renderAllJobs={this.renderAllJobs}
+              renderJobSearch={this.renderJobSearch}
+            />
+            <SearchResultPage
+              path="search/:id"
+              jobs={this.state.jobs}
+              handleJobSave={this.handleJobSave}
+            />
             <BoardContainer
               path="/"
               board={this.state.userData.board_columns}

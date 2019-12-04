@@ -5,8 +5,7 @@ import SearchResultsContainer from "./SearchResultsContainer";
 class SearchContainer extends Component {
   state = {
     jobTitle: "",
-    location: "",
-    jobs: []
+    location: ""
   };
 
   handleInput = event => {
@@ -17,51 +16,26 @@ class SearchContainer extends Component {
   handleSubmit = event => {
     event.persist();
     event.preventDefault();
-    this.getJobs(this.state.jobTitle, this.state.location);
+    this.props.renderJobSearch(this.state.jobTitle, this.state.location);
   };
 
-  async componentDidMount() {
-    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    const targetUrl = "https://jobs.github.com/positions.json";
-    const response = await fetch(proxyUrl + targetUrl);
-    const json = await response.json();
-    this.setState({ jobs: json });
-  }
-
-  async allJobs() {
-    const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
-    const targetUrl = `https://jobs.github.com/positions.json`;
-    const response = await fetch(proxyUrl + targetUrl);
-    const json = await response.json();
-    this.setState({ jobs: json });
-  }
-
-  async getJobs(position, location) {
-    const positionNoSpaces = this.removeSpaces(position);
-    const locationNoSpaces = this.removeSpaces(location);
-
-    const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
-    const targetUrl = `https://jobs.github.com/positions.json?description=${positionNoSpaces}&location=${locationNoSpaces}`;
-    const response = await fetch(proxyUrl + targetUrl);
-    const json = await response.json();
-    this.setState({ jobs: json });
-  }
-
-  removeSpaces(string) {
-    const splitString = string.split(" ");
-    return splitString.join("+");
+  componentDidMount() {
+    this.props.renderAllJobs();
   }
 
   render() {
     return (
       <div className="search-container">
-        {this.props.children}
+        {/* {this.props.children} */}
         <SearchBar
           handleSubmit={this.handleSubmit}
           handleInput={this.handleInput}
           state={this.state}
         />
-        <SearchResultsContainer jobs={this.state.jobs} />
+        <SearchResultsContainer jobs={this.props.jobs} />
+        {/* <Router>
+          <SearchResultPage path="/:id" jobs={this.state.jobs} />
+        </Router> */}
       </div>
     );
   }
