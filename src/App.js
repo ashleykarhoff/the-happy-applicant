@@ -49,7 +49,7 @@ class App extends Component {
             <SignupContainer path="signup" />
             <LoginContainer path="login" />
             <SearchContainer path="search" />
-            <SearchResultPage path=":id" />
+            <SearchResultPage path="search/:id" />
             <BoardContainer
               path="/"
               board={this.state.userData.board_columns}
