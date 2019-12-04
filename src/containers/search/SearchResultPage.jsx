@@ -1,25 +1,55 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "@reach/router";
+import SvgBackArrow from "../../icons/back-arrow";
 
 const Container = styled.div`
   margin-left: 200px;
+  padding: 25px;
+`;
+
+const Top = styled.div`
+  display: grid;
+  width: 100%;
+  justify-content: space-between;
+  grid-template-columns: 40px auto 80px;
+`;
+
+const JobDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+`;
+
+const CTAs = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-self: center;
 `;
 
 const Title = styled.h1`
   font-size: 32px;
   margin: 0;
+  max-width: 350px;
 `;
 
 const Company = styled.h2`
   margin-bottom: 3px;
   font-size: 22px;
 `;
+
 const Location = styled.h3`
   margin-top: 3px;
   font-size: 18px;
 `;
+
+const SubHeader = styled.h2`
+  font-size: 20px;
+  padding-top: 15px;
+`;
+
 const Description = styled.div`
+  padding-top: 5px;
   max-width: 800px;
   font-size: 18px;
 `;
@@ -38,7 +68,8 @@ const Button = styled.button`
 `;
 
 const imgStyle = {
-  width: "100px"
+  width: "160px",
+  alignSelf: "center"
 };
 
 class SearchResultPage extends Component {
@@ -53,21 +84,31 @@ class SearchResultPage extends Component {
       this.props.jobs.filter(job => job.id === this.props.id)[0] || {};
     return (
       <Container>
-        <Company>{job.company}</Company>
-        <Title>{job.title}</Title>
-        <Location>{job.location}</Location>
+        <Top>
+          <img
+            src={job.company_logo}
+            alt={`${job.company} logo`}
+            style={imgStyle}
+          />
+          <JobDetails>
+            <Company>{job.company}</Company>
+            <Title>{job.title}</Title>
+            <Location>{job.location}</Location>
+          </JobDetails>
+          <CTAs>
+            <Button onClick={this.onJobSave}>Save</Button>
+            <Link to={job.url}>
+              <Button>Apply</Button>
+            </Link>
+          </CTAs>
+        </Top>
+        <Link to="/search">
+          <SvgBackArrow />
+        </Link>
+        <SubHeader>Job Description</SubHeader>
         <Description>{job.description}</Description>
-        <img
-          src={job.company_logo}
-          alt={`${job.company} logo`}
-          style={imgStyle}
-        />
         <Link to={job.company_url}>
           <CompanyLink>Learn more about {job.company}</CompanyLink>
-        </Link>
-        <div onClick={this.onJobSave}>Save to Board</div>
-        <Link to={job.url}>
-          <Button>Apply</Button>
         </Link>
       </Container>
     );
