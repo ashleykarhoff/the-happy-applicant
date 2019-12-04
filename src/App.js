@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router } from "@reach/router";
+import { Router, redirectTo } from "@reach/router";
 import "./App.css";
 import TopNav from "./components/navs/TopNav";
 import SideNav from "./components/navs/SideNav";
@@ -14,8 +14,7 @@ import CardPage from "./containers/board/CardPage";
 class App extends Component {
   state = {
     userData: [],
-    jobs: [],
-    job: []
+    jobs: []
   };
 
   componentDidMount = () => {
@@ -91,6 +90,20 @@ class App extends Component {
       .catch(console.error);
   };
 
+  handleDeleteCard = cardId => {
+    // remove card for userData
+    fetch(`http://localhost:3000/api/v1/cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(resp => resp.json())
+      .then(console.log);
+    // Getting error, need to redirect to board page
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -111,7 +124,11 @@ class App extends Component {
               jobs={this.state.jobs}
               handleJobSave={this.handleJobSave}
             />
-            <CardPage path="card/:id" userData={this.state.userData} />
+            <CardPage
+              path="card/:id"
+              userData={this.state.userData}
+              handleDeleteCard={this.handleDeleteCard}
+            />
             <BoardContainer
               path="/"
               board={this.state.userData.board_columns}

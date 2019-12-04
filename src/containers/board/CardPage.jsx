@@ -87,6 +87,10 @@ class CardPage extends Component {
     this.setState({ job: job });
   }
 
+  onDelete = () => {
+    this.props.handleDeleteCard(this.state.job.id);
+  };
+
   render() {
     const {
       company,
@@ -107,15 +111,12 @@ class CardPage extends Component {
             <Location>{location}</Location>
           </JobDetails>
           <CTAs>
-            <Button>Remove</Button>
+            <Button onClick={this.onDelete}>Delete</Button>
             <Button>Apply</Button>
           </CTAs>
         </Top>
         <SubHeader>Job Description</SubHeader>
         <Description>{description}</Description>
-        {/* <Link to={company_url}>
-          <CompanyLink>Learn more about {company}</CompanyLink>
-        </Link> */}
         <CompanyLink>Learn more about {company}</CompanyLink>
       </Container>
     );
