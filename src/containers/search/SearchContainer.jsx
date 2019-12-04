@@ -55,6 +55,7 @@ class SearchContainer extends Component {
   render() {
     return (
       <div className="search-container">
+        {this.props.children}
         <SearchBar
           handleSubmit={this.handleSubmit}
           handleInput={this.handleInput}

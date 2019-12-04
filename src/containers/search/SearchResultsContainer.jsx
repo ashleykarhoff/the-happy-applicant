@@ -1,14 +1,18 @@
 import React, { Component } from "react";
+import { Link } from "@reach/router";
 import SearchResultCard from "./SearchResultCard";
 
 class SearchResultsContainer extends Component {
   state = {};
+
   render() {
     const jobs = this.props.jobs;
     return (
       <div className="search-results-container">
         {jobs.map(job => (
-          <SearchResultCard key={job.id} job={job} />
+          <Link to={`${job.id}`} key={job.id}>
+            <SearchResultCard job={job} />
+          </Link>
         ))}
       </div>
     );

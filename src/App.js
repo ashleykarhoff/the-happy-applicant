@@ -8,6 +8,8 @@ import BoardContainer from "./containers/board/BoardContainer";
 import ProfileContainer from "./containers/users/ProfileContainer";
 import LoginContainer from "./components/users/LoginContainer";
 import SignupContainer from "./components/users/SignupContainer";
+import SearchResultCard from "./containers/search/SearchResultCard";
+import SearchResultPage from "./containers/search/SearchResultPage";
 
 class App extends Component {
   state = {
@@ -47,6 +49,7 @@ class App extends Component {
             <SignupContainer path="signup" />
             <LoginContainer path="login" />
             <SearchContainer path="search" />
+            <SearchResultPage path=":id" />
             <BoardContainer
               path="/"
               board={this.state.userData.board_columns}
