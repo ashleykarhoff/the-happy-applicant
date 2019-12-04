@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-// import { Link } from "@reach/router";
+import SvgBackArrow from "../../icons/back-arrow";
+import { Link } from "@reach/router";
 
 const Container = styled.div`
   margin-left: 200px;
@@ -115,6 +116,9 @@ class CardPage extends Component {
             <Button>Apply</Button>
           </CTAs>
         </Top>
+        <Link to="/">
+          <SvgBackArrow />
+        </Link>
         <SubHeader>Job Description</SubHeader>
         <Description>{description}</Description>
         <CompanyLink>Learn more about {company}</CompanyLink>
