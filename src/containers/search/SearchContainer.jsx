@@ -17,7 +17,7 @@ class SearchContainer extends Component {
   handleSubmit = event => {
     event.persist();
     event.preventDefault();
-    // fetch search results using current search state
+    this.getJobs(this.state.jobTitle, this.state.location);
   };
 
   async componentDidMount() {
@@ -26,6 +26,30 @@ class SearchContainer extends Component {
     const response = await fetch(proxyUrl + targetUrl);
     const json = await response.json();
     this.setState({ jobs: json });
+  }
+
+  async allJobs() {
+    const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
+    const targetUrl = `https://jobs.github.com/positions.json`;
+    const response = await fetch(proxyUrl + targetUrl);
+    const json = await response.json();
+    this.setState({ jobs: json });
+  }
+
+  async getJobs(position, location) {
+    const positionNoSpaces = this.removeSpaces(position);
+    const locationNoSpaces = this.removeSpaces(location);
+
+    const proxyUrl = `https://cors-anywhere.herokuapp.com/`;
+    const targetUrl = `https://jobs.github.com/positions.json?description=${positionNoSpaces}&location=${locationNoSpaces}`;
+    const response = await fetch(proxyUrl + targetUrl);
+    const json = await response.json();
+    this.setState({ jobs: json });
+  }
+
+  removeSpaces(string) {
+    const splitString = string.split(" ");
+    return splitString.join("+");
   }
 
   render() {

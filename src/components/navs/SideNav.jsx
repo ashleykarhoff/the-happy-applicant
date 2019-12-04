@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
+import SvgSearch from "../../icons/search";
+import SvgBoards from "../../icons/boards";
+import SvgProfile from "../../icons/profile";
 
 class SideNav extends Component {
   state = {};
@@ -7,9 +10,15 @@ class SideNav extends Component {
     return (
       <div className="sidenav-container">
         <nav className="sidenav-links">
-          <Link to="search">Search</Link>
-          <Link to="/">Board</Link>
-          <Link to="profile">Profile</Link>
+          <Link to="search" className="sidebar-link">
+            <SvgSearch />
+          </Link>
+          <Link to="/">
+            <SvgBoards />
+          </Link>
+          <Link to="profile">
+            <SvgProfile />
+          </Link>
         </nav>
       </div>
     );

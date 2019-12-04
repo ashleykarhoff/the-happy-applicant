@@ -58,6 +58,10 @@
   text-decoration: none;
 }
 
+.change-my-color {
+  fill: white;
+}
+
 /* Navigation Styling Ends */
 
 /* Search Container Styling Starts */
