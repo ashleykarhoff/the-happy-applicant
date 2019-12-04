@@ -53,7 +53,6 @@ class SearchResultPage extends Component {
       this.props.jobs.filter(job => job.id === this.props.id)[0] || {};
     return (
       <Container>
-        {/* {console.log(job)} */}
         <Company>{job.company}</Company>
         <Title>{job.title}</Title>
         <Location>{job.location}</Location>
