@@ -30,6 +30,7 @@ const CTAs = styled.div`
 const Title = styled.h1`
   font-size: 32px;
   margin: 0;
+  max-width: 350px;
 `;
 
 const Company = styled.h2`

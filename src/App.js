@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, redirectTo } from "@reach/router";
+import { Router, navigate } from "@reach/router";
 import "./App.css";
 import TopNav from "./components/navs/TopNav";
 import SideNav from "./components/navs/SideNav";
@@ -63,8 +63,22 @@ class App extends Component {
     this.setState({ userData: userData });
   };
 
-  handleChangeBetweenColumns = obj => {
+  handleChangeBetweenColumns = (obj, finish, card) => {
     this.setState({ userData: obj });
+
+    // finish.id = new column id
+    // card.id = how to find card in fetch
+
+    fetch(`http://localhost:3000/api/v1/cards/${card.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify({
+        board_column_id: `${finish.id}`
+      })
+    }).then(resp => resp.json());
   };
 
   handleJobSave = job => {
@@ -87,7 +101,8 @@ class App extends Component {
       })
     })
       .then(resp => resp.json())
-      .catch(console.error);
+      .catch(console.error)
+      .then(navigate("/"));
   };
 
   handleDeleteCard = cardId => {
@@ -100,7 +115,8 @@ class App extends Component {
       }
     })
       .then(resp => resp.json())
-      .then(console.log);
+      .then(console.log)
+      .then(navigate("/"));
     // Getting error, need to redirect to board page
   };
 

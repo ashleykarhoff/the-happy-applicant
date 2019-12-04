@@ -80,7 +80,7 @@ class BoardContainer extends Component {
       obj.board_columns[newStart.id - 2] = newStart;
       obj.board_columns[newFinish.id - 2] = newFinish;
 
-      this.props.handleChangeBetweenColumns(obj);
+      this.props.handleChangeBetweenColumns(obj, finish, card);
     }
   };
 
