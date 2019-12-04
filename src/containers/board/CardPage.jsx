@@ -1,9 +1,29 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Link } from "@reach/router";
+// import { Link } from "@reach/router";
 
 const Container = styled.div`
   margin-left: 200px;
+  padding: 25px;
+`;
+
+const Top = styled.div`
+  display: grid;
+  width: 100%;
+  justify-content: space-between;
+  grid-template-columns: 40px auto 80px;
+`;
+
+const JobDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+`;
+
+const CTAs = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-self: center;
 `;
 
 const Title = styled.h1`
@@ -21,15 +41,21 @@ const Location = styled.h3`
   font-size: 18px;
 `;
 
+const SubHeader = styled.h2`
+  font-size: 20px;
+  padding-top: 15px;
+`;
+
 const Description = styled.div`
+  padding-top: 5px;
   max-width: 800px;
   font-size: 18px;
 `;
 
-// const CompanyLink = styled.h5`
-//   font-size: 18px;
-//   font-weight: 500;
-// `;
+const CompanyLink = styled.h5`
+  font-size: 18px;
+  font-weight: 500;
+`;
 
 const Button = styled.button`
   padding: 8px;
@@ -40,7 +66,8 @@ const Button = styled.button`
 `;
 
 const imgStyle = {
-  width: "100px"
+  width: "160px",
+  alignSelf: "center"
 };
 
 class CardPage extends Component {
@@ -64,23 +91,32 @@ class CardPage extends Component {
     const {
       company,
       company_logo,
-      company_url,
+      // company_url,
       description,
       job_title,
-      location,
-      url
+      location
+      // url
     } = this.state.job;
     return (
       <Container>
-        <Company>{company}</Company>
-        <Title>{job_title}</Title>
-        <Location>{location}</Location>
+        <Top>
+          <img src={company_logo} alt={`${company} logo`} style={imgStyle} />
+          <JobDetails>
+            <Company>{company}</Company>
+            <Title>{job_title}</Title>
+            <Location>{location}</Location>
+          </JobDetails>
+          <CTAs>
+            <Button>Remove</Button>
+            <Button>Apply</Button>
+          </CTAs>
+        </Top>
+        <SubHeader>Job Description</SubHeader>
         <Description>{description}</Description>
         {/* <Link to={company_url}>
           <CompanyLink>Learn more about {company}</CompanyLink>
         </Link> */}
-        <Button>Apply</Button>
-        <img src={company_logo} alt={`${company} logo`} style={imgStyle} />
+        <CompanyLink>Learn more about {company}</CompanyLink>
       </Container>
     );
   }
