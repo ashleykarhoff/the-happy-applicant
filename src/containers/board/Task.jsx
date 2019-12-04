@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
+import { Link } from "@reach/router";
 
 const Container = styled.div`
   border: 1px solid lightgrey;
@@ -14,21 +15,23 @@ class Task extends Component {
   state = {};
   render() {
     return (
-      <Draggable
-        draggableId={this.props.card.id.toString()}
-        index={this.props.index}
-      >
-        {(provided, snapshot) => (
-          <Container
-            ref={provided.innerRef}
-            isDragging={snapshot.isDragging}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-          >
-            {this.props.card.job_title}
-          </Container>
-        )}
-      </Draggable>
+      <Link to={`card/${this.props.card.id}`}>
+        <Draggable
+          draggableId={this.props.card.id.toString()}
+          index={this.props.index}
+        >
+          {(provided, snapshot) => (
+            <Container
+              ref={provided.innerRef}
+              isDragging={snapshot.isDragging}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+            >
+              {this.props.card.job_title}
+            </Container>
+          )}
+        </Draggable>
+      </Link>
     );
   }
 }

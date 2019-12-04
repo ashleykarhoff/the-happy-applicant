@@ -9,6 +9,7 @@ import ProfileContainer from "./containers/users/ProfileContainer";
 import LoginContainer from "./components/users/LoginContainer";
 import SignupContainer from "./components/users/SignupContainer";
 import SearchResultPage from "./containers/search/SearchResultPage";
+import CardPage from "./containers/board/CardPage";
 
 class App extends Component {
   state = {
@@ -67,7 +68,6 @@ class App extends Component {
   };
 
   handleJobSave = job => {
-    const userData = this.state.userData;
     const saved_column_id = this.state.userData.board_columns[0].id;
     fetch(`http://localhost:3000/api/v1/cards`, {
       method: "POST",
@@ -110,6 +110,7 @@ class App extends Component {
               jobs={this.state.jobs}
               handleJobSave={this.handleJobSave}
             />
+            <CardPage path="card/:id" userData={this.state.userData} />
             <BoardContainer
               path="/"
               board={this.state.userData.board_columns}
