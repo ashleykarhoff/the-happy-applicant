@@ -152,7 +152,7 @@ class App extends Component {
               handleCardChange={this.handleCardChange}
               handleChangeBetweenColumns={this.handleChangeBetweenColumns}
             />
-            <ProfileContainer path="profile" />
+            <ProfileContainer path="profile" userData={this.state.userData} />
           </Router>
         </div>
       </React.Fragment>
