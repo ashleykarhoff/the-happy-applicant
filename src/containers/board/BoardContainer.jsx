@@ -18,7 +18,7 @@ class BoardContainer extends Component {
     const { destination } = update;
     const opacity = destination
       ? destination.index /
-        this.props.board[update.source.droppableId - 2].cards.length
+        this.props.board[update.source.droppableId - 1].cards.length
       : 0;
     document.body.style.backgroundColor = `rgba(153, 141, 217, ${opacity})`;
     document.body.style.transition = "background-color 0.2s ease";
@@ -27,6 +27,7 @@ class BoardContainer extends Component {
   onDragEnd = result => {
     document.body.style.backgroundColor = "inherit";
     const { destination, source, draggableId } = result;
+    // console.log(destination, source, draggableId); {droppableId: "3", index: 0} {index: 0, droppableId: "4"} "6"
 
     if (!destination) {
       return;
@@ -39,11 +40,13 @@ class BoardContainer extends Component {
       return;
     }
 
-    const start = this.props.board[source.droppableId - 2];
-    const finish = this.props.board[destination.droppableId - 2];
+    const start = this.props.board[source.droppableId - 1];
+    const finish = this.props.board[destination.droppableId - 1];
     const card = start.cards.filter(
       card => card.id === parseInt(draggableId)
     )[0];
+
+    // console.log(start, finish, card);
 
     // Moving cards within a column
     if (start === finish) {
@@ -77,8 +80,8 @@ class BoardContainer extends Component {
       };
 
       const obj = this.props.userData;
-      obj.board_columns[newStart.id - 2] = newStart;
-      obj.board_columns[newFinish.id - 2] = newFinish;
+      obj.board_columns[newStart.id - 1] = newStart;
+      obj.board_columns[newFinish.id - 1] = newFinish;
 
       this.props.handleChangeBetweenColumns(obj, finish, card);
     }
@@ -94,7 +97,7 @@ class BoardContainer extends Component {
       >
         <Container>
           {columns !== undefined
-            ? columns.map(column => <Column column={column} />)
+            ? columns.map(column => <Column key={column.id} column={column} />)
             : null}
         </Container>
       </DragDropContext>

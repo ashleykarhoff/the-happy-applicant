@@ -22,7 +22,7 @@ class App extends Component {
   };
 
   async fetch() {
-    const user = await fetch("http://localhost:3000/api/v1/applicants/2");
+    const user = await fetch("http://localhost:3000/api/v1/applicants/1");
     const data = await user.json();
     this.setState({ userData: data });
   }
@@ -66,10 +66,10 @@ class App extends Component {
   handleChangeBetweenColumns = (obj, finish, card) => {
     this.setState({ userData: obj });
 
-    // finish.id = new column id
-    // card.id = how to find card in fetch
+    const cardId = card.id;
+    // console.log(obj, finish.id, card);
 
-    fetch(`http://localhost:3000/api/v1/cards/${card.id}`, {
+    fetch(`http://localhost:3000/api/v1/cards/${cardId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
