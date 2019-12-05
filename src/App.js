@@ -154,7 +154,7 @@ class App extends Component {
               handleChangeBetweenColumns={this.handleChangeBetweenColumns}
             />
             <ProfileContainer path="profile" userData={this.state.userData} />
-            <EditProfile path="profile/edit" />
+            <EditProfile path="profile/edit" userData={this.state.userData} />
           </Router>
         </div>
       </React.Fragment>

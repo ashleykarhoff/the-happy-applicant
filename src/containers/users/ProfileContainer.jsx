@@ -23,6 +23,8 @@ const EditButton = styled.button`
   font-size: 18px;
   color: white;
   background-color: #03176a;
+  padding: 8px 15px;
+  border-radius: 5px;
 `;
 
 const Bottom = styled.div`
