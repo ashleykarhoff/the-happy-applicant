@@ -5,6 +5,7 @@ import { Link } from "@reach/router";
 import parse from "html-react-parser";
 
 const Container = styled.div`
+  margin-top: 80px;
   margin-left: 200px;
   padding: 25px;
 `;

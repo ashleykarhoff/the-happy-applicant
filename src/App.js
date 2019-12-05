@@ -18,9 +18,9 @@ class App extends Component {
     jobs: []
   };
 
-  componentDidMount = () => {
+  componentDidMount() {
     this.fetch();
-  };
+  }
 
   async fetch() {
     const user = await fetch("http://localhost:3000/api/v1/applicants/1");

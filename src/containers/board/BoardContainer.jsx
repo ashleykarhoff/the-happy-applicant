@@ -4,6 +4,7 @@ import Column from "./Column";
 import { DragDropContext } from "react-beautiful-dnd";
 
 const Container = styled.div`
+  margin-top: 100px;
   margin-left: 200px;
   display: flex;
 `;
