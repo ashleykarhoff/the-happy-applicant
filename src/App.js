@@ -10,6 +10,7 @@ import LoginContainer from "./components/users/LoginContainer";
 import SignupContainer from "./components/users/SignupContainer";
 import SearchResultPage from "./containers/search/SearchResultPage";
 import CardPage from "./containers/board/CardPage";
+import EditProfile from "./containers/users/EditProfile";
 
 class App extends Component {
   state = {
@@ -153,6 +154,7 @@ class App extends Component {
               handleChangeBetweenColumns={this.handleChangeBetweenColumns}
             />
             <ProfileContainer path="profile" userData={this.state.userData} />
+            <EditProfile path="profile/edit" />
           </Router>
         </div>
       </React.Fragment>

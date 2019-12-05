@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "@reach/router";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -84,7 +85,9 @@ class ProfileContainer extends Component {
           <Name>
             {this.state.first_name} {this.state.last_name}
           </Name>
-          <EditButton>Edit Profile</EditButton>
+          <Link to="/profile/edit">
+            <EditButton>Edit Profile</EditButton>
+          </Link>
         </Top>
         <Bottom>
           <ProfileDetails>
