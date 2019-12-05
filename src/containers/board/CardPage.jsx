@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import SvgBackArrow from "../../icons/back-arrow";
 import { Link } from "@reach/router";
+import parse from "html-react-parser";
 
 const Container = styled.div`
   margin-left: 200px;
@@ -85,7 +86,8 @@ class CardPage extends Component {
     const jobId = this.props.id;
     const response = await fetch(`http://localhost:3000/api/v1/cards/${jobId}`);
     const job = await response.json();
-
+    const description = await parse(job.description);
+    job.description = description;
     this.setState({ job: job });
   }
 
@@ -103,6 +105,7 @@ class CardPage extends Component {
       location
       // url
     } = this.state.job;
+
     return (
       <Container>
         <Top>
